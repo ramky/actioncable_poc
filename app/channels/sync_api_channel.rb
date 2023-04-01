@@ -1,6 +1,6 @@
 class SyncApiChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "books_#{uuid}"
+    stream_from "books_api"
   end
 
   def unsubscribed
