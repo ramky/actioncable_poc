@@ -5,7 +5,11 @@ class BroadcastController < ApplicationController
   }
 
   def index
-    ActionCable.server.broadcast("books_api", COMPLETION_RESPONSE)
+    render json: {status: :ok}
+  end
+
+  def show
+    ActionCable.server.broadcast("books_#{params[:uuid]}", COMPLETION_RESPONSE)
 
     render json: COMPLETION_RESPONSE
   end
