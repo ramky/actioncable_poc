@@ -1,16 +1,15 @@
 class BroadcastController < ApplicationController
-  COMPLETION_RESPONSE = {
-    body: 'some book',
-    command: 'close',
-  }
-
   def index
     render json: {status: :ok}
   end
 
   def show
-    ActionCable.server.broadcast("books_#{params[:uuid]}", COMPLETION_RESPONSE)
+    completion_response = {
+      body: Faker::Book.title,
+      command: 'close'
+    }
+    ActionCable.server.broadcast("books_#{params[:uuid]}", completion_response)
 
-    render json: COMPLETION_RESPONSE
+    render json: completion_response
   end
 end
