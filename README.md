@@ -32,15 +32,15 @@ OR
 
 - Configuration
 
-- change username in config/database.yml to your Mac OSX username
-
 - Database initialization/creation
 ```
 createdb
 psql
-=# create database actioncable_poc_development;
-=# create database actioncable_poc_test;
-
+=#
+create database actioncable_poc_development;
+grant all privileges on database "actioncable_poc_development" to poc;
+create database actioncable_poc_test;
+grant all privileges on database "actioncable_poc_test to poc;
 ```
 
 - How to run the test suite
@@ -52,5 +52,3 @@ psql
 bundle install
 bundle exec rails server
 ```
-
-- ...

@@ -6,15 +6,15 @@ default: &default
 development:
   <<: *default
   database: actioncable_poc_development
-  username: riyer
+  username: poc
 
 test:
   <<: *default
   database: actioncable_poc_test
-  username: riyer
+  username: poc
 
 production:
   <<: *default
   database: actioncable_poc_production
-  username: actioncable_poc
+  username: poc
   password: <%= ENV["ACTIONCABLE_POC_DATABASE_PASSWORD"] %>
