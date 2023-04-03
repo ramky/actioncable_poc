@@ -3,6 +3,10 @@ class BroadcastController < ApplicationController
     render json: {status: :ok}
   end
 
+  #  TODO:
+  #  instead of triggering this via controller
+  #  when karaka receives the request it will have a UUID, it needs to make a perform_later (sidekiq) call
+  #  to send the response and set the close command so the client can close the connection
   def show
     completion_response = {
       body: Faker::Book.title,
