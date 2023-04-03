@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   get 'broadcast', to: 'broadcast#index'
   get 'broadcast/:uuid', to: 'broadcast#show'
 
+  post 'authenticate', to: 'authentication#authenticate'
+
   root "broadcast#index"
 end
