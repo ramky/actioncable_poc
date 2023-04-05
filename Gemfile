@@ -9,6 +9,10 @@ gem "puma", "~> 5.0"
 gem "sprockets-rails"
 gem 'redis'
 gem 'faker'
+gem 'jwt'
+gem 'bcrypt','~> 3.1.7'
+gem 'karafka'
+
 # gem "importmap-rails"
 # gem "turbo-rails"
 # gem "stimulus-rails"
