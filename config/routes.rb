@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   post 'authenticate', to: 'authentication#authenticate'
 
   root "broadcast#index"
+
+  mount Karafka::Web::App, at: '/karafka'
 end

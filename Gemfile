@@ -17,6 +17,9 @@ gem 'bcrypt'
 gem 'jwt'
 gem 'simple_command'
 
+gem 'karafka'
+gem 'karafka-web'
+
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb

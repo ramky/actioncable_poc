@@ -5,10 +5,16 @@ class BroadcastController < ApplicationController
 
   def show
     completion_response = {
-      body: Faker::Book.title,
+      body: 'tmp ' + Faker::Book.title,
       command: 'close'
     }
-    ActionCable.server.broadcast("books_#{params[:uuid]}", completion_response)
+
+    # Call Kafka with the book
+    message = { 'author' => 'Cervantes' }.to_json
+    Karafka.producer.produce_sync(topic: 'author', payload: message)
+
+    # Now, this is in the books_consumer
+    #ActionCable.server.broadcast("books_#{params[:uuid]}", completion_response)
 
     render json: completion_response
   end

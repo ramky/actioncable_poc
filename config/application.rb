@@ -39,5 +39,7 @@ module ActioncablePoc
     config.action_cable.mount_path = '/cable'
     config.action_cable.allowed_request_origins = ['*']
     config.action_cable.disable_request_forgery_protection = true
+
+    config.active_job.queue_adapter = :karafka
   end
 end
