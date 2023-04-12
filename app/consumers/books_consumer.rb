@@ -7,7 +7,8 @@ class BooksConsumer < ApplicationConsumer
     fullMessage = ''
     messages.each do |message|
       Karafka.logger.info "Consumed following message: #{message.payload}"
-      fullMessage = fullMessage + message.payload
+      fullMessage = fullMessage + message.payload.to_s
+      mark_as_consumed!(messages.last)
     end
     completion_response = {
       #body: Faker::Book.title,
