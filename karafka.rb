@@ -19,7 +19,21 @@ class KarafkaApp < Karafka::App
     WaterDrop::Instrumentation::LoggerListener.new(Karafka.logger)
   )
 
+  consumer_groups.draw do
+    consumer_group :batched_group do
+      topic :books do
+        config(partitions: 1)
+        consumer BooksConsumer
+      end
+    end
+  end
+=begin
   routes.draw do
+    active_job_topic :default do
+      # Expire jobs after 1 day
+      config(partitions: 5, 'retention.ms': 86_400_000)
+    end
+
     topic :books do
       # Uncomment this if you want Karafka to manage your topics configuration
       # Managing topics configuration via routing will allow you to ensure config consistency
@@ -29,6 +43,7 @@ class KarafkaApp < Karafka::App
       consumer BooksConsumer
     end
   end
+=end
 end
 
 Karafka::Web.enable!
