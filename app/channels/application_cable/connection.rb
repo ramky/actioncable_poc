@@ -1,6 +1,7 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     identified_by :uuid
+    attr_reader :author, :uuid
 
     def connect
       token = self.request.params[:Authorization]

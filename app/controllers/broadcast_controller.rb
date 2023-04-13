@@ -10,12 +10,16 @@ class BroadcastController < ApplicationController
     }
 
     # Call Kafka with the book
-    message = { 'author' => 'Cervantes' }.to_json
+    message = { 'uuid' => params[:uuid], 'author' => '1' }.to_json
     Karafka.producer.produce_sync(topic: 'author', payload: message)
 
     # Now, this is in the books_consumer
     #ActionCable.server.broadcast("books_#{params[:uuid]}", completion_response)
 
-    render json: completion_response
+    #render json: completion_response
+  end
+
+  def renderbooks(response)
+    render json: response
   end
 end
