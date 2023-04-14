@@ -41,6 +41,14 @@ create database actioncable_poc_development;
 grant all privileges on database "actioncable_poc_development" to poc;
 create database actioncable_poc_test;
 grant all privileges on database "actioncable_poc_test to poc;
+
+After the creation:
+rails db:migrate
+rails db:seed 
+(or from rails console: 
+a1 = Author.create(name: 'Cervantes')
+a2 = Author.create(name: 'Unamuno')
+)
 ```
 
 - How to run the test suite
@@ -51,4 +59,5 @@ grant all privileges on database "actioncable_poc_test to poc;
 ```
 bundle install
 bundle exec rails server
+bundle exec karafka server
 ```
