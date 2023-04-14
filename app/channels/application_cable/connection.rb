@@ -1,7 +1,7 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     identified_by :uuid
-    attr_reader :author, :uuid
+    #attr_reader :author, :uuid
 
     def connect
       token = self.request.params[:Authorization]
@@ -15,6 +15,7 @@ module ApplicationCable
           reject_unauthorized_connection
         else
           self.uuid = SecureRandom.urlsafe_base64
+          #ActionCable.server.broadcast("books_#{self.uuid}", self.uuid)
         end
       else
         reject_unauthorized_connection

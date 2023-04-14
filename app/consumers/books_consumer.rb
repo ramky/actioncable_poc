@@ -14,9 +14,9 @@ class BooksConsumer < ApplicationConsumer
         body: message.payload["books"],
         command: 'close'
       }
-      bc.renderbooks(completion_response)
-      ActionCable.server.broadcast("books_#{message.palyload['uuid']}", completion_response)
       mark_as_consumed!(messages.last)
+      ActionCable.server.broadcast("books_#{message.payload['uuid']}", completion_response)
+      #bc.renderbooks(completion_response)
     end
 
   end
