@@ -9,8 +9,10 @@ class BroadcastController < ApplicationController
       command: 'close'
     }
 
+    oAuth = Author.find_by(uuid: params[:uuid])
+
     # Call Kafka with the book
-    message = { 'uuid' => params[:uuid], 'author' => '1' }.to_json
+    message = { 'uuid' => params[:uuid], 'author' => oAuth.id }.to_json
     Karafka.producer.produce_sync(topic: 'author', payload: message)
 
     # Now, this is in the books_consumer

@@ -16,6 +16,11 @@ module ApplicationCable
         else
           self.uuid = SecureRandom.urlsafe_base64
           #ActionCable.server.broadcast("books_#{self.uuid}", self.uuid)
+          # Store uuid with author. We open a connection for every websocket client (not for author, but in the poc is equivalent, and that's why I store together)
+          oAuth = Author.find(author)
+          oAuth.update(uuid: self.uuid)
+          #oAuth.uuid = self.uuid
+          #oAuth.save
         end
       else
         reject_unauthorized_connection
