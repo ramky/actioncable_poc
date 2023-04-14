@@ -9,9 +9,10 @@ class BooksConsumer < ApplicationConsumer
 
     messages.each do |message|
       Karafka.logger.info "Consumed following message: #{message.payload}"
+      author_name = Author.find(message.payload['author']).name
       completion_response = {
         #body: Faker::Book.title,
-        body: message.payload["books"],
+        body: author_name + ',' + message.payload["books"],
         command: 'close'
       }
       mark_as_consumed!(messages.last)
