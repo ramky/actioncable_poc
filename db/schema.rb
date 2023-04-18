@@ -21,12 +21,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_083705) do
     t.string "uuid"
   end
 
-  create_table "books", id: false, force: :cascade do |t|
-    t.serial "id", null: false
-    t.integer "author_id", null: false
-    t.string "title", limit: 120, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
