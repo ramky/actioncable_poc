@@ -80,11 +80,32 @@ GEM
     erubi (1.12.0)
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
+    ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    google-protobuf (3.22.3-arm64-darwin)
+    google-protobuf (3.22.3-x86_64-darwin)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     jwt (2.7.0)
+    karafka (2.0.38)
+      karafka-core (>= 2.0.12, < 3.0.0)
+      thor (>= 0.20)
+      waterdrop (>= 2.4.10, < 3.0.0)
+      zeitwerk (~> 2.3)
+    karafka-core (2.0.12)
+      concurrent-ruby (>= 1.1)
+      karafka-rdkafka (>= 0.12.1)
+    karafka-rdkafka (0.12.1)
+      ffi (~> 1.15)
+      mini_portile2 (~> 2.6)
+      rake (> 12)
+    karafka-web (0.4.0)
+      erubi (~> 1.4)
+      karafka (>= 2.0.38, < 3.0.0)
+      karafka-core (>= 2.0.12, < 3.0.0)
+      roda (~> 3.63)
+      tilt (~> 2.0)
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -96,6 +117,7 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.1)
     minitest (5.18.0)
     msgpack (1.7.0)
     net-imap (0.3.4)
@@ -156,6 +178,8 @@ GEM
       redis-client (>= 0.9.0)
     redis-client (0.14.1)
       connection_pool
+    roda (3.66.0)
+      rack
     simple_command (1.0.1)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
@@ -165,9 +189,13 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     thor (1.2.1)
+    tilt (2.1.0)
     timeout (0.3.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    waterdrop (2.5.1)
+      karafka-core (>= 2.0.12, < 3.0.0)
+      zeitwerk (~> 2.3)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -188,7 +216,10 @@ DEPENDENCIES
   bcrypt
   bootsnap
   faker
+  google-protobuf
   jwt
+  karafka
+  karafka-web
   pg (~> 1.1)
   pry-byebug
   puma (~> 5.0)
