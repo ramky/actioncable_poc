@@ -16,6 +16,7 @@ gem 'faker'
 gem 'bcrypt'
 gem 'jwt'
 gem 'simple_command'
+gem 'google-protobuf'
 
 gem 'karafka'
 gem 'karafka-web'
