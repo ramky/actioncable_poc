@@ -10,7 +10,7 @@ Things you may want to cover:
 
 ```
 asdf plugin-update ruby
-asdf install ruby 3.2.1
+asdf install ruby 3.1.3
 ```
 
 - System dependencies
@@ -46,6 +46,7 @@ After the creation:
 rails db:migrate
 rails db:seed 
 (or from rails console: 
+User.create!(email: 'f@tela.com' , password: '1234' , password_confirmation: '1234')
 a1 = Author.create(name: 'Cervantes')
 a2 = Author.create(name: 'Unamuno')
 )
