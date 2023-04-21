@@ -22,22 +22,22 @@ class BooksConsumer < ApplicationConsumer
     bc = BroadcastController.new
 
     messages.each do |message|
+      # Old JSON processing
       #Karafka.logger.info "Consumed following message: #{message.payload}"
+      #author_name = Author.find(message.payload['author']).name
+      # in completion_response:
+      #body: author_name + ',' + message.payload["books"],
+      #ActionCable.server.broadcast("books_#{message.payload['uuid']}", completion_response)
 
       proto_message = Book.decode(message.raw_payload)
 
-      #author_name = Author.find(message.payload['author']).name
       author_name = Author.find(proto_message.author).name
       completion_response = {
-        #body: Faker::Book.title,
-        #body: author_name + ',' + message.payload["books"],
         body: author_name + ',' + getBooksFromArray(proto_message.title),
         command: 'close'
       }
       mark_as_consumed!(messages.last)
-      #ActionCable.server.broadcast("books_#{message.payload['uuid']}", completion_response)
       ActionCable.server.broadcast("books_#{proto_message.uuid}", completion_response)
-      #bc.renderbooks(completion_response)
     end
 
   end

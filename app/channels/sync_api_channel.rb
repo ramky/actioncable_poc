@@ -1,8 +1,7 @@
 class SyncApiChannel < ApplicationCable::Channel
   def subscribed
     stream_from "books_#{uuid}"
-    #Don't work
-    #self.broadcast_to("books_#{uuid}", { author: 'XXX', data: {'uuid' => uuid}})
+    # Send uuid to client to associate with posterior broadcast call
     broadcast_to("books_#{uuid}", uuid)
     ActionCable.server.broadcast("books_#{uuid}", uuid)
   end
