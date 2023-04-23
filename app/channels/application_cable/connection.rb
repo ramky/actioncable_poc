@@ -14,11 +14,19 @@ module ApplicationCable
         else
           # Generates uuid that identifies connection.
           self.uuid = SecureRandom.urlsafe_base64
-          # Store uuid with author. We open a connection for every websocket client
-          # (not for author, but in the poc is equivalent, and that's why I store together)
-          oAuth = Author.find(author)
-          if !oAuth.nil?
-            oAuth.update(uuid: self.uuid)
+          begin
+            oAuth = Author.find(author)
+            if !oAuth.nil?
+              # If we store uuid with author: We open a connection for every websocket client
+              # (not for author, but in the poc is equivalent, and that's why I could store together)
+              #oAuth.update(uuid: self.uuid)
+              # Finally, I store the relation between uuid and author in a new table: conns
+              oConn = Conn.create(uuid: self.uuid.to_s, author: author)
+            end
+          rescue => e
+            # If we don't find author in DB, reject connection.
+            # ()If we want to allow connection, broadcast controller can control if client doesn't exist and close connection later.)
+            reject_unauthorized_connection
           end
         end
       else

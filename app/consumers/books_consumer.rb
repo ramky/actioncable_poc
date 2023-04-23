@@ -37,7 +37,11 @@ class BooksConsumer < ApplicationConsumer
         command: 'close'
       }
       mark_as_consumed!(messages.last)
+      #Send info through websocket
       ActionCable.server.broadcast("books_#{proto_message.uuid}", completion_response)
+
+      #Delete connection register
+      Conn.find_by(uuid: proto_message.uuid).delete
     end
 
   end
